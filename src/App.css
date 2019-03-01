@@ -1,0 +1,185 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+div, button {
+  margin: 10px;
+  padding:0px,0px,0px,0px;
+}
+/**************************************/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+  background-color: #fafafa;
+}
+ol, ul {
+  list-style: none;
+
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  /*background-color: #212121;*/
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  /*color: #BDBDBD;*/
+  font-family: 'Mali', cursive;
+}
+
+#loginurl {
+  display: inline;
+  margin: 0 1em 0 1em;
+}
+
+button {
+  justify-content: center;
+  align-items: center;
+}
+
+.activePage{
+  text-decoration: underline !important;
+}
+
+.unactivePage{
+  text-decoration: none;
+}
+
+.ListTrack{
+  text-align: center !important;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.LoginPage {
+  height: 90vh; /* For 100% screen height */
+  width:  100vw; /* For 100% screen width */
+  position: relative;
+    background-image: url("./img/markus-spiske-78530-unsplash.jpg");
+  background-attachment: fixed;
+  /*background: #ffffff url("./img/markus-spiske-78530-unsplash.jpg") no-repeat right top;*/
+
+}
+.LoginPageChild{
+  margin: 0;
+  position: absolute;               /* 2 */
+  top: 50%;                         /* 3 */
+  transform: translate(0, -50%)
+}
+
+.SearchPage{
+  height: 90vh; /* For 100% screen height */
+  width:  100vw; /* For 100% screen width */
+  vertical-align: center;
+  text-align: center;
+}
+
+.AppBar{
+
+}
+
+.SearchGrid{
+  vertical-align: center;
+  text-align: center;
+}
+
+.ui.card {
+  margin: 1em auto !important; /*Fix the grid centering problem*/
+}
+
+.TrackPage{
+  vertical-align: center;
+  text-align: center;
+}
+/*  WARNINGGGG
+*   This code is making searchpage results smaller!!!!
+*/
+@media  (min-width: 768px)  {
+  .ui.container {
+    width: 723px !important;
+  }
+  .TrackProgress{
+    width: 723px !important;
+  }
+}
+
+textarea {  /*to make textarea responsive*/
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  width: 100%;
+}
+/*
+to fix some weird mobile errors on pc try
+body{
+  touch-action: none;
+}*/
