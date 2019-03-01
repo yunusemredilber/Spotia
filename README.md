@@ -1,3 +1,12 @@
+This site live on [spotia.space](https://spotia.space). While this project is still in development progress, backend could make you wait around 10 seconds.
+
+For backend [web-api-auth-examples](https://github.com/spotify/web-api-auth-examples) used. Also you might want to check [ Spotify's Authorization Scopes](https://developer.spotify.com/documentation/general/guides/scopes/).
+
+For UI [Material-UI](https://github.com/mui-org/material-ui) used.
+
+
+-----------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
