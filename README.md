@@ -4,6 +4,11 @@ For backend [web-api-auth-examples](https://github.com/spotify/web-api-auth-exam
 
 For UI [Material-UI](https://github.com/mui-org/material-ui) used.
 
+-----------------------------------------------
+
+![Spotia](https://github.com/yunusemredilber/Spotia/blob/master/Image/Spotia.PNG "Spotia")
+
+![Spotia Mobile](https://github.com/yunusemredilber/Spotia/blob/master/Image/SpotiaMobile.PNG "Spotia on Mobile")
 
 -----------------------------------------------
 
