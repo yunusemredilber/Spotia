@@ -16,7 +16,7 @@ import {CssBaseline} from "@material-ui/core";
 let palette = {
     primary: deepPurple,
     secondary:{main:"#7e57c2"},
-    //type: 'dark',
+    /*type: 'dark',*/
 };
 
 const theme = createMuiTheme({

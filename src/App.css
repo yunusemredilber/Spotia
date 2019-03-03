@@ -149,6 +149,7 @@ button {
 .SearchGrid{
   vertical-align: center;
   text-align: center;
+
 }
 
 .ui.card {
@@ -162,12 +163,13 @@ button {
 /*  WARNINGGGG
 *   This code is making searchpage results smaller!!!!
 */
+
 @media  (min-width: 768px)  {
   .ui.container {
-    width: 723px !important;
+    width: 900px !important;
   }
   .TrackProgress{
-    width: 723px !important;
+    width: 900px !important;
   }
 }
 

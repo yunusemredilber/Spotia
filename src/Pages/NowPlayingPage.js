@@ -213,7 +213,10 @@ class NowPlayingPage extends Component {
             <div className={"NowPlayingPage"}>
 
                 <Container textAlign='center' className={"TrackPage"}>
-                <Track data={this.props.np.response.item}/>
+                    <div style={{marginTop:"10px",marginBottom:"25px"}}>
+                        <Track data={this.props.np.response.item}/>
+                    </div>
+
                 <Tooltip title={((this.props.np.tcl[0]))?"Remove from library":"Add to library"} placement={"bottom"}>
                 <Fab  aria-label="Edit" style={{marginRight:"5px"}} onClick={this.toggleLibraryAdd}>
                     {(this.props.np.tcl[0])?<Done/>:<Add/>}

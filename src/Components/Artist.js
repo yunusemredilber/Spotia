@@ -1,46 +1,77 @@
 import React, {Component} from 'react';
-import { Card, Image,Grid,Progress } from 'semantic-ui-react';
+import {Link} from "react-router-dom";
+import {withStyles} from "@material-ui/core/styles";
+
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+
+import Typography from '@material-ui/core/Typography';
+
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+import Button from '@material-ui/core/Button';
+
+const styles = {
+    card: {
+        width: 250,
+    },
+    media: {
+        height: 250,
+        width:250
+    },
+};
+
 class Artist extends Component {
 
-    ClickHandler = () => {
-        window.location.replace(this.props.data.uri);
-    };
+
 
     render() {
-        let colors = ["grey","brown","yellow","olive","green"];
-        let color;
-        if (this.props.data.popularity<20)
-            color = colors[0];
-        else if (this.props.data.popularity<40)
-            color = colors[1];
-        else if (this.props.data.popularity<60)
-            color = colors[2];
-        else if (this.props.data.popularity<80)
-            color = colors[3];
-        else if (this.props.data.popularity<100)
-            color = colors[4];
 
-        let userIcon = "https://www.animuspilates.hu/_files/velemenyek/profil_image.png";
-        return (
-            <Grid.Column>
-                <Card onClick={this.ClickHandler}>
-                    <Image src={(this.props.data.images[0])?this.props.data.images[0].url:userIcon}/>
-                    <Card.Content>
-                        <Card.Header>{this.props.data.name}</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>{this.props.data.followers.total}</span>
-                        </Card.Meta>
-                        <Card.Description>{this.props.data.genres.map((genre,index)=> (<div key={index}>{genre} </div>) )}</Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                        <Progress percent={this.props.data.popularity} size='small' color={color}>
-                            Popularity
-                        </Progress>
-                    </Card.Content>
-                </Card>
-            </Grid.Column>
+        const { classes, theme } = this.props;
+
+        return(
+            <Card className={classes.card} style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
+                <Link to={`/artist/${this.props.data.id}`}>
+                    <CardActionArea>
+                        <CardMedia
+                            className={classes.media}
+                            image={(this.props.data.images[0])?this.props.data.images[0].url:""/*this can make error in console*/}
+                            title={"Open "+this.props.data.name}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h6" component="h2">
+                                {this.props.data.name}
+                            </Typography>
+                            <Typography component="p">
+                                {this.props.data.genres.map((genre,i)=>{
+                                    if (i==this.props.data.genres.length-1)
+                                        return(genre.toString()+".");
+                                    return(genre.toString()+" ,");
+                                })}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Link>
+                <LinearProgress variant="determinate" value={this.props.data.popularity} title={"Popularity"}/>
+                <CardActions style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
+
+                    <Link to={`/artist/${this.props.data.id}`}>
+                        <Button size="small" color="primary" style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
+                            Learn More
+                        </Button>
+                    </Link>
+                    <Button size="small" color="primary" style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
+                        Find More
+                    </Button>
+                </CardActions>
+
+            </Card>
         );
     }
 }
 
-export default Artist;
+export default withStyles(styles, { withTheme: true })(Artist);

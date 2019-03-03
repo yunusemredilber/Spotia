@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import { connect } from 'react-redux';
 
 import {setToken} from "../Actions/auth-actions";
-import {clearLocalToken,setLocalToken} from "../Services/authOperations";
+
 import {BACKEND_BASE} from "../confing/env";
 
 class Callback extends Component {

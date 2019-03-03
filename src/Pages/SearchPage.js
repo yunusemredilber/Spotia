@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 
-import { Grid ,Container,Placeholder} from 'semantic-ui-react'
+import { Grid ,Container,Placeholder} from 'semantic-ui-react';
 
 import Track from "../Components/Track";
 import { connect } from 'react-redux';
@@ -52,7 +52,7 @@ class SearchPage extends Component {
 
         const Tracks = () =>
             <Container textAlign='center'>
-                <Grid stackable verticalAlign='middle' columns={3} centered className={"SearchGrid"} stretched>
+                <Grid stackable columns={3} centered className={"SearchGrid"} stretched container>
                     {
                         (!isResponseExist) ? <p><br/>Search!</p> :
                             (this.props.search.response.tracks.items.map((data) =>
