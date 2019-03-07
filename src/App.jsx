@@ -9,6 +9,9 @@ import NowPlayingPage from "./Pages/NowPlayingPage";
 import SearchPage from "./Pages/SearchPage";
 import LoginPage from "./Pages/LoginPage";
 import TrackPage from "./Pages/TrackPage";
+import ArtistPage from "./Pages/ArtistPage";
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import {getLocalToken,setLocalToken} from "./Services/authOperations";
 
@@ -21,6 +24,26 @@ import AlbumPage from "./Pages/AlbumPage";
 
 import {BACKEND_BASE} from "./confing/env";
 import Callback from "./Pages/Callback";
+import {CssBaseline} from "@material-ui/core";
+
+import deepPurple from '@material-ui/core/colors/deepPurple';
+
+let palette = {
+    primary: deepPurple,
+    secondary:{main:"#7e57c2"},
+   /* type: 'dark',*/
+};
+
+const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+        suppressDeprecationWarnings: true,
+        fontSize: 17,
+    },
+    palette: palette,
+});
+
+
 class App extends Component {
   constructor(props){
     super(props);/*
@@ -104,6 +127,8 @@ class App extends Component {
   render() {
 
         return (
+            <MuiThemeProvider theme={theme}>
+                <CssBaseline/>
             <Router>
       <div className="App">
 
@@ -120,12 +145,14 @@ class App extends Component {
 
               <Route exact path='/track/:id' component={TrackPage}></Route>
               <Route exact path='/album/:albumID' component={AlbumPage}></Route>
+              <Route exact path='/artist/:artistID' component={ArtistPage}></Route>
               <Route exact path='/callback/' component={Callback}></Route>
 
               <Route exact /*strict*/ component={NoPageFound}/>
           </Switch>
       </div>
             </Router>
+            </MuiThemeProvider>
 
     );
   }

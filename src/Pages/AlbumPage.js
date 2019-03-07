@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 
 import {getAlbumObject} from "../Actions/album-actions";
-import {Button, Container, Image, Segment} from "semantic-ui-react";
+import { Container} from "semantic-ui-react";
 import Typography from '@material-ui/core/Typography';
-import {Link} from "react-router-dom";
-
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +12,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import ButtonMUI from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
+
+import Paper from '@material-ui/core/Paper';
 
 
 import Avatar from '@material-ui/core/Avatar';
@@ -25,6 +25,7 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Fab from '@material-ui/core/Fab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
     avatar: {
@@ -55,59 +56,58 @@ class AlbumPage extends Component {
 
     render() {
         const { classes } = this.props;
-        if (this.props.album.albumObject===null || this.props.album.albumObject===undefined) return (<div>Loading</div>);
+        if (this.props.album.albumObject===null || this.props.album.albumObject===undefined || this.props.album.fetchingAlbumObject) return (<div><CircularProgress/></div>);
         else return (
             <div>
                 <Container textAlign='center'>
 
-                    <Segment style={{marginTop:"10px"}} raised clearing loading={this.props.album.fetchingAlbumObject}>
+                    <Paper style={{marginTop:"10px"}}>
                         <Typography variant="h5" gutterBottom>
                             {this.props.album.albumObject.name} -
-                            <ButtonMUI
+                            <Button
                                 onClick={()=>{
                                     window.location.replace(this.props.album.albumObject.uri);
                                 }}
                                 variant="outlined"
                                 className={classes.button}>
                                 Open this Album on Spotify
-                            </ButtonMUI>
+                            </Button>
                         </Typography>
-                    </Segment>
+                    </Paper>
 
-                    <Segment
-                        raised
-                        loading={this.props.album.fetchingAlbumObject}
-                        clearing
-
+                    <Paper style={{marginTop:"10px"}}
                     >
-                        <Image
+                        <img
                             src={this.props.album.albumObject.images[0].url}
-                            bordered
-                            centered
-                            size='medium'
+                            alt={this.props.album.albumObject.name}
+                            width={"250"}
+                            height={"250"}
+                            style={{margin:"5px"}}
 
                         />
 
-                    </Segment>
+                    </Paper>
 
 
 
-                    <Segment raised loading={this.props.album.fetchingAlbumObject}>
+                    <Paper style={{marginTop:"10px"}}>
                         <Typography variant="subtitle1" gutterBottom>
                             {this.props.album.albumObject.artists.map((artist,i)=>{
                                 return (
                                     <Button
-                                        as={Link} to={`/artist/${artist.id.toString()}`}
-                                        variant={"contained"}
+                                        onClick={()=>{
+                                            this.props.history.push(`/artist/${artist.id.toString()}`);
+                                        }}
+                                        style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}
                                         key={i}>
                                         {artist.name.toString()}
                                     </Button>);
 
                             })}
                         </Typography>
-                    </Segment>
+                    </Paper>
 
-                    <Segment raised loading={this.props.album.fetchingAlbumObject}>
+                    <Paper style={{marginTop:"10px"}}>
                         <List component="nav">
                             {this.props.album.albumObject.tracks.items.map((track,i)=>{
                                 return (<ListItem/* button*/ key={i} alignItems="flex-start">
@@ -130,8 +130,7 @@ class AlbumPage extends Component {
                                 </ListItem>);
                             })}
                         </List>
-                    </Segment>
-
+                    </Paper>
 
 
                 </Container>

@@ -31,7 +31,7 @@ class Artist extends Component {
 
     render() {
 
-        const { classes, theme } = this.props;
+        const { classes} = this.props;
 
         return(
             <Card className={classes.card} style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
@@ -48,7 +48,7 @@ class Artist extends Component {
                             </Typography>
                             <Typography component="p">
                                 {this.props.data.genres.map((genre,i)=>{
-                                    if (i==this.props.data.genres.length-1)
+                                    if (i===this.props.data.genres.length-1)
                                         return(genre.toString()+".");
                                     return(genre.toString()+" ,");
                                 })}

@@ -32,7 +32,7 @@ class Track extends Component {
 
         render(){
 
-            const { classes, theme } = this.props;
+            const { classes } = this.props;
             return(
                 <Card className={classes.card} style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
                     <Link to={`/track/${this.props.data.id}`}>
@@ -61,11 +61,11 @@ class Track extends Component {
                     <CardActions style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
 
                         <Link to={`/track/${this.props.data.id}`}>
-                            <Button size="small" color="primary" style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
-                                Learn More
-                            </Button>
-                        </Link>
-                        <Button size="small" color="primary" style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
+                        <Button size="small"  style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
+                            Learn More
+                        </Button>
+                    </Link>
+                        <Button size="small"  style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
                             Find More
                         </Button>
                     </CardActions>

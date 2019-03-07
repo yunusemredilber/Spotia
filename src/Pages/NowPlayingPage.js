@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import Track from "../Components/Track";
 
 import Fab from '@material-ui/core/Fab';

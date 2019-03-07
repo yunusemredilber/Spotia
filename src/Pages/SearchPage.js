@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 
-import { Grid ,Container,Placeholder} from 'semantic-ui-react';
+import { Container,Grid} from 'semantic-ui-react';
 
 import Track from "../Components/Track";
 import { connect } from 'react-redux';
@@ -13,6 +13,8 @@ import {getSearch,cleanSearch,setTemp,setOffset,setSType} from "../Actions/searc
 import Album from "../Components/Album";
 import Artist from "../Components/Artist";
 import {Redirect} from "react-router-dom";
+
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class SearchPage extends Component {
 
@@ -70,7 +72,7 @@ class SearchPage extends Component {
                 </Grid>
                 <br/>
                 {(isResponseExist)?
-                    <Button variant="contained" onClick={this.getMore}>
+                    <Button variant="outlined" onClick={this.getMore}>
                         More
                     </Button>:<br/>}
 
@@ -95,7 +97,7 @@ class SearchPage extends Component {
                 </Grid>
                 <br/>
                 {(isResponseExist)?
-                    <Button variant="contained" onClick={this.getMore}>
+                    <Button variant="outlined" onClick={this.getMore}>
                         More
                     </Button>:<br/>}
 
@@ -120,7 +122,7 @@ class SearchPage extends Component {
                 </Grid>
                 <br/>
                 {(isResponseExist)?
-                    <Button variant="contained" onClick={this.getMore}>
+                    <Button variant="outlined" onClick={this.getMore}>
                         More
                     </Button>:<br/>}
 
@@ -136,30 +138,11 @@ class SearchPage extends Component {
         else if (this.props.search.sType==='artist')
             Selected = Artists;
 
-        const Loading = () =><Container textAlign='center'>
-            <Grid stackable verticalAlign='middle' columns={3} centered className={"SearchGrid"}>
-                {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map((key)=>{
-                    return (<Grid.Column key={key}>
-                        <Placeholder>
-                            <Placeholder.Image square />
-                        </Placeholder>
-                        <Placeholder>
-                            <Placeholder.Header>
-                                <Placeholder.Line length='medium' />
-                                <Placeholder.Line length='very short' />
-                            </Placeholder.Header>
-                            <Placeholder.Paragraph>
-                                <Placeholder.Line length='short' />
-                            </Placeholder.Paragraph>
-                        </Placeholder>
-                    </Grid.Column>);
-                })}
-            </Grid>
-        </Container>;
+        const Loading = () =><div><CircularProgress/></div>;
 
         return (
             <div className={"SearchPage"}>
-                <form noValidate autoComplete="off" onSubmit={this.SubmitHandler}>
+                <form noValidate autoComplete="off" onSubmit={this.SubmitHandler} style={{marginBottom:"10px"}}>
                 <TextField
                     id="standard-name"
                     label="Name"
