@@ -26,22 +26,13 @@ import {BACKEND_BASE} from "./confing/env";
 import Callback from "./Pages/Callback";
 import {CssBaseline} from "@material-ui/core";
 
-import deepPurple from '@material-ui/core/colors/deepPurple';
+import SettingsPage from "./Pages/SettingsPage";
+import {setSettings} from "./Actions/settings-actions";
 
-let palette = {
-    primary: deepPurple,
-    secondary:{main:"#7e57c2"},
-   /* type: 'dark',*/
-};
+import {getLocalSettings,setLocalSettings} from "./Services/settingsOperations";
 
-const theme = createMuiTheme({
-    typography: {
-        useNextVariants: true,
-        suppressDeprecationWarnings: true,
-        fontSize: 17,
-    },
-    palette: palette,
-});
+
+
 
 
 class App extends Component {
@@ -88,6 +79,16 @@ class App extends Component {
           this.props.onSetToken(null);
           window.location.replace(BACKEND_BASE);
       }
+
+      // Settings init
+      let settings = getLocalSettings();
+        if (settings===null || settings===undefined)
+        {
+            setLocalSettings(this.props.settings);
+        }
+        else {
+            this.props.setSettings(settings);
+        }
           
   }
 
@@ -125,7 +126,8 @@ class App extends Component {
 
  
   render() {
-
+      console.log(this.props);
+      const theme = createMuiTheme(this.props.settings);
         return (
             <MuiThemeProvider theme={theme}>
                 <CssBaseline/>
@@ -133,7 +135,7 @@ class App extends Component {
       <div className="App">
 
 
-          <AppBar logout={this.Logout} className={"AppBar"} />
+          {(getLocalToken()!==undefined)&&<AppBar logout={this.Logout} className={"AppBar"} />}
           <Switch>
 
               <Route path={"/"} exact /*strict*/ component={HomePage}/>
@@ -147,6 +149,8 @@ class App extends Component {
               <Route exact path='/album/:albumID' component={AlbumPage}></Route>
               <Route exact path='/artist/:artistID' component={ArtistPage}></Route>
               <Route exact path='/callback/' component={Callback}></Route>
+
+              <Route path={"/settings"} exact /*strict*/ component={SettingsPage}/>
 
               <Route exact /*strict*/ component={NoPageFound}/>
           </Switch>
@@ -164,7 +168,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = {
     onSetToken:setToken,
-    getTrackObject
+    getTrackObject,
+    setSettings
 };
 export default connect(mapStateToProps,mapDispatchToProps)(App);
 

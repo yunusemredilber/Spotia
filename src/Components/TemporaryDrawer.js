@@ -10,9 +10,9 @@ import IndeterminateCheckBox from '@material-ui/icons/IndeterminateCheckBox';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
+import Settings from '@material-ui/icons/Settings';
 import {NavLink} from 'react-router-dom';
 
-import Switch from '@material-ui/core/Switch';
 
 
 const styles = {
@@ -76,16 +76,13 @@ class TemporaryDrawer extends React.Component {
                             <ListItemText primary={'Logout'} />
                         </ListItem>
                     </div>
-                    <div onClick={this.Change}>
-                        <ListItem button key={'toggleDarkMode'}>
-                            <ListItemIcon><Switch
-                                checked={this.state.darkMode}
-                                onChange={this.handleChange('darkMode')}
-                                value="checkedA"
-                            /></ListItemIcon>
-                            <ListItemText primary={'Dark Mode'} />
+                    <NavLink className={"unactivePage"}  activeClassName="activePage" exact to="/settings">
+                        <ListItem button key={'Settings'}>
+                            <ListItemIcon><Settings /></ListItemIcon>
+                            <ListItemText primary={'Settings'} />
                         </ListItem>
-                    </div>
+                    </NavLink>
+
                 </List>
             </div>
         );

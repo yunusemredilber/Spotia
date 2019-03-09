@@ -14,7 +14,6 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
-import AddIcon from '@material-ui/icons/Add';
 import CopyToClipboardDialogWrapped from "./CopyToClipboardDialogWrapped";
 
 const types = ['Telegram', 'Spotify URL'];
@@ -106,21 +105,14 @@ class ShareDialogWrapped extends Component {
                         {types.map(type => (
                             <ListItem button onClick={() => this.handleListItemClick(type)} key={type}>
                                 <ListItemAvatar>
-                                    <Avatar className={classes.purpleAvatar}>
+                                    <Avatar className={classes.avatar}>
                                         {type.charAt(0)}
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary={type} />
                             </ListItem>
                         ))}
-                        <ListItem button onClick={() => this.handleListItemClick('')}>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <AddIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="add account" />
-                        </ListItem>
+
                     </List>
                 </div>
                 <CopyToClipboardDialogWrapped
