@@ -11,7 +11,6 @@ export function getLocalSettings(){
 };
 
 export function clearLocalSettings(){
-    return localStorage.clear();
-
+    localStorage.remove(settingsKey);
 };
 

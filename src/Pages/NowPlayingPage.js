@@ -204,8 +204,11 @@ class NowPlayingPage extends Component {
         };
         // Time {this.props.np.response.progress_ms/this.props.np.response.item.duration_ms*this.props.np.response.item.duration_ms/60000}
 
-        if (this.props.np.response.error)
+        if (this.props.np.response.error){
+            // if token will expired try to fix with refresh token in future
             return (<Redirect to={`/login/${this.props.np.response.error.message.toString()}`}/>);
+        }
+
 
 
         if (this.props.np.response.item===undefined) return <OpenSpotifyFirst/>;

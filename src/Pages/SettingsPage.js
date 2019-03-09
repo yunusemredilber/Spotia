@@ -111,13 +111,20 @@ class SettingsPage extends Component {
                             {"Colors"}
                         </Typography>
                         <Divider />
-                        {[{name:"Red",main:"#f44336",light:"#ff7961",dark:"#ba000d",main_s:"#ef5350",light_s:"#ff867c",dark_s:"#b61827"},
-                          {name:"Deep Purple",main:"#673ab7",light:"#9a67ea",dark:"#320b86",main_s:"#7e57c2",light_s:"#b085f5",dark_s:"#4d2c91"},
-                          {name:"Indigo",main:"#3f51b5",light:"#757de8",dark:"#002984",main_s:"#5c6bc0",light_s:"#8e99f3",dark_s:"#26418f"},
-                          {name:"Teal",main:"#009688",light:"#52c7b8",dark:"#00675b",main_s:"#26a69a",light_s:"#64d8cb",dark_s:"#00766c"},
-                          {name:"Deep Orange",main:"#ff5722",light:"#ff8a50",dark:"#c41c00",main_s:"#ff7043",light_s:"#ffa270",dark_s:"#c63f17"},
-                          {name:"Amber",main:"#ffc107",light:"#fff350",dark:"#c79100",main_s:"#ffca28",light_s:"#fffd61",dark_s:"#c79a00"},
-                          {name:"Lime",main:"#cddc39",light:"#ffff6e",dark:"#99aa00",main_s:"#d4e157",light_s:"#ffff89",dark_s:"#a0af22"},
+                        {[{name:"Deep Purple",main:"#673ab7",light:"#9a67ea",dark:"#320b86",
+                                              main_s:"#7e57c2",light_s:"#b085f5",dark_s:"#4d2c91"},
+                          {name:"Red",main:"#f44336",light:"#ff7961",dark:"#ba000d",
+                                      main_s:"#ef5350",light_s:"#ff867c",dark_s:"#b61827"},
+                          {name:"Indigo",main:"#3f51b5",light:"#757de8",dark:"#002984",
+                                         main_s:"#5c6bc0",light_s:"#8e99f3",dark_s:"#26418f"},
+                          {name:"Teal",main:"#009688",light:"#52c7b8",dark:"#00675b",
+                                       main_s:"#26a69a",light_s:"#64d8cb",dark_s:"#00766c"},
+                          {name:"Deep Orange",main:"#ff5722",light:"#ff8a50",dark:"#c41c00",
+                                              main_s:"#ff7043",light_s:"#ffa270",dark_s:"#c63f17"},
+                          {name:"Amber",main:"#ffc107",light:"#fff350",dark:"#c79100",
+                                        main_s:"#ffca28",light_s:"#fffd61",dark_s:"#c79a00"},
+                          {name:"Lime",main:"#cddc39",light:"#ffff6e",dark:"#99aa00",
+                                       main_s:"#d4e157",light_s:"#ffff89",dark_s:"#a0af22"},
 
                         ].map((data,i)=>{
                             return(<Chip

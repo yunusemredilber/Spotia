@@ -121,7 +121,9 @@ class App extends Component {
 
     Logout = () => {
         this.props.onSetToken(null);
-        window.open("http://spotify.com/logout/", "_blank");
+        this.props.onSetToken(null);
+        window.open("http://spotify.com/logout/", "_blank","width=400,height=600");
+
     };
 
  
@@ -135,7 +137,7 @@ class App extends Component {
       <div className="App">
 
 
-          {(getLocalToken()!==undefined)&&<AppBar logout={this.Logout} className={"AppBar"} />}
+          <AppBar logout={this.Logout} className={"AppBar"} token={this.props.auth.token} />
           <Switch>
 
               <Route path={"/"} exact /*strict*/ component={HomePage}/>
@@ -163,7 +165,7 @@ class App extends Component {
 
 }
 const mapStateToProps = (state, props) => {
-    return state;
+    return {...state,...props};
 };
 
 const mapDispatchToProps = {

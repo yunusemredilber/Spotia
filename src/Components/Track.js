@@ -35,7 +35,7 @@ class Track extends Component {
             const { classes } = this.props;
             return(
                 <Card className={classes.card} style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
-                    <Link to={`/track/${this.props.data.id}`}>
+                    <Link to={`/track/${this.props.data.id}`} style={{color: "inherit"}}>
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}

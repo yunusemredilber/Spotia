@@ -11,7 +11,8 @@ export function getLocalToken(){
 };
 
 export function clearLocalToken(){
-    return localStorage.clear();
+
+    localStorage.remove(tokenKey);
 
 };
 

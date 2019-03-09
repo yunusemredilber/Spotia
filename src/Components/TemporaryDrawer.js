@@ -10,9 +10,9 @@ import IndeterminateCheckBox from '@material-ui/icons/IndeterminateCheckBox';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
+import PermIdentity  from '@material-ui/icons/PermIdentity';
 import Settings from '@material-ui/icons/Settings';
 import {NavLink} from 'react-router-dom';
-
 
 
 const styles = {
@@ -70,12 +70,22 @@ class TemporaryDrawer extends React.Component {
                 </List>
                 <Divider />
                 <List>
-                    <div onClick={this.props.logout}>
-                        <ListItem button key={'Logout'}>
-                            <ListItemIcon><IndeterminateCheckBox /></ListItemIcon>
-                            <ListItemText primary={'Logout'} />
-                        </ListItem>
-                    </div>
+                    {(this.props.token===null)?(
+                        <NavLink className={"unactivePage"}  activeClassName="activePage" exact to="/login">
+                            <ListItem button key={'Login'}>
+                                <ListItemIcon><PermIdentity /></ListItemIcon>
+                                <ListItemText primary={'Login'} />
+                            </ListItem>
+                            </NavLink>
+                    ):(
+                        <div onClick={this.props.logout}>
+                            <ListItem button key={'Logout'}>
+                                <ListItemIcon><IndeterminateCheckBox /></ListItemIcon>
+                                <ListItemText primary={'Logout'} />
+                            </ListItem>
+                        </div>
+                    )}
+
                     <NavLink className={"unactivePage"}  activeClassName="activePage" exact to="/settings">
                         <ListItem button key={'Settings'}>
                             <ListItemIcon><Settings /></ListItemIcon>
