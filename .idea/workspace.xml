@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="591b38ae-ef78-4857-8bd7-e6188746cded" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AppBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AppBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/TemporaryDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/TemporaryDrawer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Track.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Track.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/NowPlayingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/NowPlayingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/SettingsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/SettingsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Reducers/settingsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reducers/settingsReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/authOperations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/authOperations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/settingsOperations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/settingsOperations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/confing/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/confing/env.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-21">
-              <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
+            <state relative-caret-position="2910">
+              <caret line="128" column="1" selection-start-line="128" selection-start-column="1" selection-end-line="128" selection-end-column="1" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -40,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Track.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="54" column="39" lean-forward="true" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+            <state relative-caret-position="1140">
+              <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -52,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/AppBar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="126" column="37" lean-forward="true" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
+            <state relative-caret-position="3180">
+              <caret line="126" column="37" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -61,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pages/NowPlayingPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="207" column="76" selection-start-line="207" selection-start-column="76" selection-end-line="207" selection-end-column="76" />
+            <state relative-caret-position="4800">
+              <caret line="199" selection-start-line="199" selection-end-line="199" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -76,11 +67,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/TemporaryDrawer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
+            <state relative-caret-position="203">
+              <caret line="112" column="18" selection-start-line="112" selection-start-column="18" selection-end-line="112" selection-end-column="18" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/confing/env.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="1" column="60" lean-forward="true" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -125,7 +125,6 @@
         <option value="$PROJECT_DIR$/src/Actions/np-actions.js" />
         <option value="$PROJECT_DIR$/src/Components/SetSoundDialogWrapped.js" />
         <option value="$PROJECT_DIR$/backend/package.json" />
-        <option value="$PROJECT_DIR$/src/confing/env.js" />
         <option value="$PROJECT_DIR$/src/Pages/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/Components/SimpleSlider.js" />
         <option value="$PROJECT_DIR$/src/Pages/Callback.js" />
@@ -156,10 +155,11 @@
         <option value="$PROJECT_DIR$/src/Components/TemporaryDrawer.js" />
         <option value="$PROJECT_DIR$/src/Components/AppBar.js" />
         <option value="$PROJECT_DIR$/src/Pages/NowPlayingPage.js" />
+        <option value="$PROJECT_DIR$/src/confing/env.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -184,6 +184,12 @@
               <item name="Spotia" type="b2602c69:ProjectViewProjectNode" />
               <item name="Spotia" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Spotia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Spotia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="confing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Spotia" type="b2602c69:ProjectViewProjectNode" />
@@ -278,12 +284,13 @@
       <workItem from="1551801353455" duration="16694000" />
       <workItem from="1552052166302" duration="8834000" />
       <workItem from="1552075961748" duration="3944000" />
-      <workItem from="1552118778911" duration="22091000" />
+      <workItem from="1552118778911" duration="22709000" />
+      <workItem from="1552491067866" duration="44000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="271541000" />
+    <option name="totallyTimeSpent" value="272203000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -366,13 +373,6 @@
     <entry file="file://$PROJECT_DIR$/backend/package.json" />
     <entry file="file://$PROJECT_DIR$/backend/authorization_code/public/index.html" />
     <entry file="file://$PROJECT_DIR$/backend/authorization_code/app.js" />
-    <entry file="file://$PROJECT_DIR$/src/confing/env.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="1" column="63" selection-start-line="1" selection-start-column="63" selection-end-line="1" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pages/LoginPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="503">
@@ -665,8 +665,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
+        <state relative-caret-position="2910">
+          <caret line="128" column="1" selection-start-line="128" selection-start-column="1" selection-end-line="128" selection-end-column="1" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -675,28 +675,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Track.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="54" column="39" lean-forward="true" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+        <state relative-caret-position="1140">
+          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/TemporaryDrawer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/AppBar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="126" column="37" lean-forward="true" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
+        <state relative-caret-position="3180">
+          <caret line="126" column="37" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
@@ -705,11 +695,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pages/NowPlayingPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="207" column="76" selection-start-line="207" selection-start-column="76" selection-end-line="207" selection-end-column="76" />
+        <state relative-caret-position="4800">
+          <caret line="199" selection-start-line="199" selection-end-line="199" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/TemporaryDrawer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="112" column="18" selection-start-line="112" selection-start-column="18" selection-end-line="112" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/confing/env.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="1" column="60" lean-forward="true" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
         </state>
       </provider>
     </entry>
