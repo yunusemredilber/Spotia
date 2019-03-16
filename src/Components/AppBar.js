@@ -20,6 +20,7 @@ import Delete from '@material-ui/icons/Delete';
 
 import {Link} from "react-router-dom";
 
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -128,6 +129,7 @@ class SearchAppBar extends Component{
                                         {
                                             this.state.fakeNotification.map((notification,i)=>{
                                                 return(
+
                                                     <MenuItem onClick={this.handleNotificationsClose} key={i} >
 
                                                         <ListItemIcon className={classes.icon}>
@@ -139,7 +141,10 @@ class SearchAppBar extends Component{
                                                             <Delete />
                                                             </IconButton>
                                                         </ListItemIcon>
+
                                                     </MenuItem>
+
+
                                                 );
                                             })
                                         }

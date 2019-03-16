@@ -36,7 +36,7 @@ class Callback extends Component {
             e = r.exec(q);
         }
         return hashParams;
-    }
+    };
 
 
 

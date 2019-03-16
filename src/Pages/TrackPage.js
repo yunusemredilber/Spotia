@@ -106,7 +106,7 @@ class TrackPage extends Component {
 
                     <Paper style={{marginTop:"10px"}}>
                         <Typography variant="subtitle1" gutterBottom>
-                            Time: {this.props.track.trackObject.duration_ms/60000} munites.
+                            Time: {parseInt(this.props.track.trackObject.duration_ms/60000)} munites {parseInt(this.props.track.trackObject.duration_ms%60000/1000)} seconds.
                         </Typography>
                     </Paper>
 

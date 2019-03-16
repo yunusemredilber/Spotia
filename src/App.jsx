@@ -13,7 +13,7 @@ import ArtistPage from "./Pages/ArtistPage";
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-import {getLocalToken,setLocalToken} from "./Services/authOperations";
+import {getLocalToken,setLocalToken,setLocalRefreshToken} from "./Services/authOperations";
 
 
 import {setToken} from "./Actions/auth-actions";
@@ -65,7 +65,8 @@ class App extends Component {
       if (token!==undefined) {
           this.props.onSetToken(token);
           setLocalToken(token);
-          console.log(getLocalToken());
+          let refresh_token = params.refresh_token;
+          setLocalRefreshToken(refresh_token);
       }
       // If there is not a new token then check local storage
       else if (getLocalToken()!==undefined){
@@ -123,7 +124,6 @@ class App extends Component {
         this.props.onSetToken(null);
         this.props.onSetToken(null);
         window.open("http://spotify.com/logout/", "_blank","width=400,height=600");
-
     };
 
  

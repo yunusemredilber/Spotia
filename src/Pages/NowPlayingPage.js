@@ -22,8 +22,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-
-
+import {setLocalToken} from "../Services/authOperations";
 
 
 import {getCurrentlyPlaying,
@@ -38,7 +37,7 @@ import {getCurrentlyPlaying,
 import {Container, Grid} from "semantic-ui-react";
 import SetSoundDialogWrapped from "../Components/SetSoundDialogWrapped";
 import ShareDialogWrapped from "../Components/ShareDialogWrapped";
-
+import getNewToken from "../Services/getNewToken";
 let removedTrackID="";
 
 const optionsMoore = [
@@ -48,6 +47,8 @@ const optionsMoore = [
     'Go to album',
     'More Tracks Like that',
 ];
+
+
 
 
 
@@ -139,7 +140,6 @@ class NowPlayingPage extends Component {
         this.setState({ anchorEl: null });
         switch (index) {
             case 0:{
-                console.log("pembeee");
                 this.handleOpenSetSoundDialog();
                 break;
             }
@@ -184,7 +184,34 @@ class NowPlayingPage extends Component {
     };
 
 
+
+
     render() {
+
+        if (this.props.np.response.error){
+            // if token will expired try to fix with refresh token in future
+
+            if (this.props.np.response.error.message === "The access token expired")
+            {
+                let newToken = getNewToken();
+                if (newToken) {
+                    newToken.then((nt)=>{
+                        if(nt.access_token)
+                        {
+                            // set our new token
+                            console.log(nt.access_token);
+                            this.props.setToken(nt.access_token);
+                            setLocalToken(nt.access_token);
+                            this.props.onGetCurrentlyPlaying(this.props.auth.token);
+
+                        }else return (<Redirect to={`/login/${this.props.np.response.error.message.toString()}`}/>);
+                    })
+                }
+
+            }
+
+
+        };
 
         const OpenSpotifyFirst = () =>{
 
@@ -204,10 +231,7 @@ class NowPlayingPage extends Component {
         };
         // Time {this.props.np.response.progress_ms/this.props.np.response.item.duration_ms*this.props.np.response.item.duration_ms/60000}
 
-        if (this.props.np.response.error){
-            // if token will expired try to fix with refresh token in future
-            return (<Redirect to={`/login/${this.props.np.response.error.message.toString()}`}/>);
-        }
+
 
 
 
