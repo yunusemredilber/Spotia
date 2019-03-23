@@ -18,7 +18,6 @@ import Paper from '@material-ui/core/Paper';
 
 
 import Avatar from '@material-ui/core/Avatar';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import ArrowForward from '@material-ui/icons/ArrowForward';
 
@@ -26,7 +25,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Fab from '@material-ui/core/Fab';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import LinearProgress from '@material-ui/core/LinearProgress';
 const styles = theme => ({
     avatar: {
         margin: 1,
@@ -34,7 +33,6 @@ const styles = theme => ({
 
     purpleAvatar: {
         color: '#fff',
-        backgroundColor: deepPurple[500],
     },
     button: {
         margin: theme.spacing.unit,
@@ -55,13 +53,14 @@ class AlbumPage extends Component {
     }
 
     render() {
+        console.log(this.props);
         const { classes } = this.props;
         if (this.props.album.albumObject===null || this.props.album.albumObject===undefined || this.props.album.fetchingAlbumObject) return (<div><CircularProgress/></div>);
         else return (
-            <div>
+            <div style={{padding:"10px"}}>
                 <Container textAlign='center'>
 
-                    <Paper style={{marginTop:"10px"}}>
+                    <Paper >
                         <Typography variant="h5" gutterBottom>
                             {this.props.album.albumObject.name} -
                             <Button
@@ -108,11 +107,19 @@ class AlbumPage extends Component {
                     </Paper>
 
                     <Paper style={{marginTop:"10px"}}>
+                        <Typography variant="subtitle1" gutterBottom style={{padding:"5px"}}>
+                            Popularity
+                            <LinearProgress variant="determinate" value={this.props.album.albumObject.popularity} title={"Popularity"}/>
+                        </Typography>
+                    </Paper>
+
+                    <Paper style={{marginTop:"10px"}}>
                         <List component="nav">
                             {this.props.album.albumObject.tracks.items.map((track,i)=>{
                                 return (<ListItem/* button*/ key={i} alignItems="flex-start">
                                     <ListItemIcon>
-                                        <Avatar className={classes.purpleAvatar}>{
+                                        <Avatar className={classes.purpleAvatar} style={{backgroundColor:this.props.settings.palette.primary.main}}>{
+
                                             track.name.charAt(0).toLocaleUpperCase()+track.name.charAt(1).toUpperCase()
                                         }</Avatar>
                                     </ListItemIcon>

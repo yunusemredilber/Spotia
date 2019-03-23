@@ -6,6 +6,7 @@ import trackReducer from "./trackReducer";
 import albumReducer from "./albumReducer";
 import artistReducer from "./artistReducer";
 import settingsReducer from "./settingsReducer";
+import additionalSettingsReducer from "./additionalSettingsReducer";
 
 export const rootReducer = combineReducers({
     search:searchReducer,
@@ -14,5 +15,6 @@ export const rootReducer = combineReducers({
     track:trackReducer,
     album:albumReducer,
     artist:artistReducer,
-    settings:settingsReducer
+    settings:settingsReducer,
+    additionalSettings:additionalSettingsReducer
 });

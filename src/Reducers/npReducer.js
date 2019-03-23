@@ -30,7 +30,8 @@ import {CURRENTLY_PLAYING_PENDING,
         CURRENTLY_PLAYING_CONTEXT_PENDING,
         SET_VOLUME_PENDING,
         SET_VOLUME_FULFILLED,
-        SET_VOLUME_REJECTED} from "../Actions/np-actions";
+        SET_VOLUME_REJECTED,
+        CLEAR_RESPONSE} from "../Actions/np-actions";
 
 const initialState = {
     fetching: false,
@@ -245,6 +246,14 @@ export default function npReducer(state=initialState, action) {
             return {
                 ...state,
                 error: action.payload,
+            };
+
+            // CLEAR_RESPONSE
+
+        case CLEAR_RESPONSE:
+            return {
+                ...state,
+                response: action.payload,
             };
 
 

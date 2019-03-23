@@ -47,7 +47,7 @@ class SetSoundDialogWrapped extends Component {
     };
 
     state={
-        volume: (this.props.np.currentlyPlayingContext)?this.props.np.currentlyPlayingContext.device.volume_percent : 50
+        volume: 50
     };
 
 /*

@@ -6,6 +6,7 @@ import {FETCH_SEARCH_PENDING,
     SET_OFFSET,
     SET_STYPE
 } from "../Actions/search-actions";
+import {CLEAR_RESPONSE} from "../Actions/search-actions";
 
 const initialState = {
     fetching: false,
@@ -54,6 +55,12 @@ export default function searchReducer(state=initialState, action) {
             return {
                 ...state,
                 sType: action.payload,
+            };
+
+        case CLEAR_RESPONSE:
+            return {
+                ...state,
+                response: action.payload,
             };
 
         default:

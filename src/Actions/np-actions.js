@@ -44,6 +44,7 @@ export const SET_VOLUME_PENDING = "SET_VOLUME_PENDING";
 export const SET_VOLUME_FULFILLED = "SET_VOLUME_FULFILLED";
 export const SET_VOLUME_REJECTED = "SET_VOLUME_REJECTED";
 
+export const CLEAR_RESPONSE = "CLEAR_RESPONSE";
 
 export function getCurrentlyPlaying(token) {
     return dispatch => {
@@ -294,4 +295,13 @@ async function sV(token,volume) {
         }
     });
     return await response;
+};
+
+export function clearResponse() {
+    return dispatch => {
+        return dispatch({
+            type: CLEAR_RESPONSE,
+            payload: {}
+        });
+    }
 };

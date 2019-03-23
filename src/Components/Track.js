@@ -30,7 +30,9 @@ const styles = {
 class Track extends Component {
 
 
-        render(){
+
+
+    render(){
 
             const { classes } = this.props;
             return(

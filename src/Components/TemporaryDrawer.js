@@ -93,6 +93,13 @@ class TemporaryDrawer extends React.Component {
                         </ListItem>
                     </NavLink>
 
+
+                        <ListItem button key={'d190324'}>
+
+                            <ListItemText primary={'Version'} secondary={"d190324"}/>
+                        </ListItem>
+
+
                 </List>
             </div>
         );

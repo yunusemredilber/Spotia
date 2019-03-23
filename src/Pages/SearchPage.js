@@ -1,20 +1,34 @@
 import React, {Component} from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-
-import { Container,Grid} from 'semantic-ui-react';
-
-import Track from "../Components/Track";
 import { connect } from 'react-redux';
-import {getSearch,cleanSearch,setTemp,setOffset,setSType} from "../Actions/search-actions";
-import Album from "../Components/Album";
-import Artist from "../Components/Artist";
 import {Redirect} from "react-router-dom";
 
+// Redux Actions
+import {getSearch,
+        cleanSearch,
+        setTemp,
+        setOffset,
+        setSType,
+        clearResponse} from "../Actions/search-actions";
+import {setToken} from "../Actions/auth-actions";
+
+// Material UI Imports
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+
+// Semantic UI Imports
+import { Container,Grid} from 'semantic-ui-react';
+
+// Components
+import Album from "../Components/Album";
+import Artist from "../Components/Artist";
+import Track from "../Components/Track";
+import getNewToken from "../Services/getNewToken";
+import {clearLocalRefreshToken, clearLocalToken, setLocalToken} from "../Services/authOperations";
+
 
 class SearchPage extends Component {
 
@@ -47,8 +61,47 @@ class SearchPage extends Component {
 
 
     render() {
-        if (this.props.search.response.error)
-            return (<Redirect to={`/login/${this.props.search.response.error.message.toString()}`}/>);
+
+        // *** Auth and token operations ->
+        if (this.props.search.response.error && this.props.search.response.error.message.trim()!==""){
+            // If token will expired or broken, try to fix with refresh token.
+
+            if (this.props.search.response.error.message === "The access token expired" || this.props.search.response.error.message === "Invalid access token" )
+            {
+                let newToken = getNewToken(); // Fetching refresh token.
+                if (newToken) {
+                    this.props.clearResponse(); // Clear response for staying away from here after.
+                    newToken.then((nt)=>{
+                        if(nt.access_token) // Try to check if there is new refresh token in future.< >
+                        {
+                            // set our new token
+                            this.props.setToken(nt.access_token); // Update our redux store.
+                            setLocalToken(nt.access_token); // Update local storage.
+                            return (<CircularProgress />);
+
+                            // If there will be any error we should redirect to login page.
+                        }else {
+                            // If our refresh token is broken we should make our user unauthorized.
+                            this.props.setToken(null); // Update our redux store.
+                            clearLocalToken(); // Clear our local storage token.
+                            clearLocalRefreshToken(); // Clear our local storage refresh token.
+
+                            return (<Redirect to={`/login/${this.props.search.response.error.message.toString()}`}/>);
+                        }
+                    })
+                }else {
+                    // If our refresh token is broken we should make our user unauthorized.
+                    this.props.setToken(null); // Update our redux store.
+                    clearLocalToken(); // Clear our local storage token.
+                    clearLocalRefreshToken(); // Clear our local storage refresh token.
+
+                    return (<Redirect to={`/login/${this.props.search.response.error.message.toString()}`}/>);
+                }
+            }
+            else return (<Redirect to={`/login/${this.props.search.response.error.message.toString()}`}/>);
+        };
+        // <- Auth and token operations ***
+
 
         let isResponseExist= !!this.props.search.response.tracks || !!this.props.search.response.albums || !!this.props.search.response.artists;
 
@@ -188,7 +241,9 @@ const mapDispatchToProps = {
     onCleanSearch:cleanSearch,
     onSetTemp:setTemp,
     onSetOffset:setOffset,
-    onSetSType:setSType
+    onSetSType:setSType,
+    clearResponse,
+    setToken
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(SearchPage);

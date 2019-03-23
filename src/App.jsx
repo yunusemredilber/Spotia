@@ -28,8 +28,9 @@ import {CssBaseline} from "@material-ui/core";
 
 import SettingsPage from "./Pages/SettingsPage";
 import {setSettings} from "./Actions/settings-actions";
+import {setAdditionalSettings} from "./Actions/additionalSettings-actions";
 
-import {getLocalSettings,setLocalSettings} from "./Services/settingsOperations";
+import {getLocalSettings,setLocalSettings,getAdditionalLocalSettings,setAdditionalLocalSettings} from "./Services/settingsOperations";
 
 
 
@@ -90,6 +91,16 @@ class App extends Component {
         else {
             this.props.setSettings(settings);
         }
+
+      // Additional Settings init
+      let additionalSettings = getAdditionalLocalSettings();
+      if (additionalSettings===null || additionalSettings===undefined)
+      {
+          setAdditionalLocalSettings(this.props.additionalSettings);
+      }
+      else {
+          this.props.setAdditionalSettings(additionalSettings);
+      }
           
   }
 
@@ -126,39 +137,57 @@ class App extends Component {
         window.open("http://spotify.com/logout/", "_blank","width=400,height=600");
     };
 
- 
-  render() {
-      console.log(this.props);
+    hasScrollBar = () =>{
+        let hasScrollbar;
+
+        if (typeof window.innerWidth === 'number')
+            hasScrollbar = window.innerWidth > document.documentElement.clientWidth;
+
+         return  hasScrollbar ||
+            document.documentElement.scrollHeight > document.documentElement.clientHeight;
+    };
+
+
+
+
+    render() {
+
+
       const theme = createMuiTheme(this.props.settings);
         return (
-            <MuiThemeProvider theme={theme}>
-                <CssBaseline/>
-            <Router>
-      <div className="App">
+            <div >
+                <MuiThemeProvider theme={theme}>
+                    <CssBaseline/>
+                    <Router>
+                        <div className={(this.props.additionalSettings.animatedGradientBackground)?"animatedGradientBackground":"App"}>
 
 
-          <AppBar logout={this.Logout} className={"AppBar"} token={this.props.auth.token} />
-          <Switch>
+                            <AppBar logout={this.Logout} className={"AppBar"} token={this.props.auth.token} />
+                            <div className={"scroll"}>
+                                <Switch>
 
-              <Route path={"/"} exact /*strict*/ component={HomePage}/>
-              <Route path={"/np"} exact /*strict*/ component={NowPlayingPage} />
-              <Route path={"/search"} exact /*strict*/ component={SearchPage}/>
+                                    <Route path={"/"} exact /*strict*/ component={HomePage}/>
+                                    <Route path={"/np"} exact /*strict*/ component={NowPlayingPage} />
+                                    <Route path={"/search"} exact /*strict*/ component={SearchPage}/>
 
-              <Route path={"/login/:message"} exact /*strict*/ component={LoginPage}/>
-              <Route path={"/login"} exact /*strict*/ component={LoginPage}/>
+                                    <Route path={"/login/:message"} exact /*strict*/ component={LoginPage}/>
+                                    <Route path={"/login"} exact /*strict*/ component={LoginPage}/>
 
-              <Route exact path='/track/:id' component={TrackPage}></Route>
-              <Route exact path='/album/:albumID' component={AlbumPage}></Route>
-              <Route exact path='/artist/:artistID' component={ArtistPage}></Route>
-              <Route exact path='/callback/' component={Callback}></Route>
+                                    <Route exact path='/track/:id' component={TrackPage}></Route>
+                                    <Route exact path='/album/:albumID' component={AlbumPage}></Route>
+                                    <Route exact path='/artist/:artistID' component={ArtistPage}></Route>
+                                    <Route exact path='/callback/' component={Callback}></Route>
 
-              <Route path={"/settings"} exact /*strict*/ component={SettingsPage}/>
+                                    <Route path={"/settings"} exact /*strict*/ component={SettingsPage}/>
 
-              <Route exact /*strict*/ component={NoPageFound}/>
-          </Switch>
-      </div>
-            </Router>
-            </MuiThemeProvider>
+                                    <Route exact /*strict*/ component={NoPageFound}/>
+
+                                </Switch>
+                            </div>
+                        </div>
+                    </Router>
+                </MuiThemeProvider>
+            </div>
 
     );
   }
@@ -171,7 +200,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = {
     onSetToken:setToken,
     getTrackObject,
-    setSettings
+    setSettings,
+    setAdditionalSettings
 };
 export default connect(mapStateToProps,mapDispatchToProps)(App);
 

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import {getLocalSettings,setLocalSettings} from "../Services/settingsOperations";
+import {getLocalSettings,setLocalSettings,getAdditionalLocalSettings,setAdditionalLocalSettings} from "../Services/settingsOperations";
 import Paper from '@material-ui/core/Paper';
 import {Container} from "semantic-ui-react";
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 import {connect} from "react-redux";
 import {setSettings} from "../Actions/settings-actions";
+
+import {setAdditionalSettings} from "../Actions/additionalSettings-actions";
 
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
@@ -44,6 +46,17 @@ class SettingsPage extends Component {
             setLocalSettings(settings);
         }
 
+    };
+
+    handleAGBToggle = () => {
+        // redux
+            this.props.setAdditionalSettings({...this.props.additionalSettings,animatedGradientBackground:!this.props.additionalSettings.animatedGradientBackground});
+        // local-storage
+        let additionalSettings = getAdditionalLocalSettings();
+        if (additionalSettings!==null && additionalSettings!==undefined) {
+                additionalSettings.animatedGradientBackground = !additionalSettings.animatedGradientBackground;
+            setAdditionalLocalSettings(additionalSettings);
+        }
     };
 
     handleDarkModeToggle = () =>{
@@ -158,6 +171,18 @@ class SettingsPage extends Component {
 
                     </Paper>
 
+                    <Paper style={{marginTop:"10px"}}>
+                        <Typography variant="body1" gutterBottom>
+                            {"Animated Gradient Background"}
+                        </Typography>
+                        <Divider />
+                        <Switch
+                            checked={this.props.additionalSettings.animatedGradientBackground}
+                            onChange={this.handleAGBToggle}
+                        />
+
+                    </Paper>
+
                 </Container>
             </div>
         );
@@ -169,7 +194,8 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = {
-    setSettings
+    setSettings,
+    setAdditionalSettings
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(SettingsPage));

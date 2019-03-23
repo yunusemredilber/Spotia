@@ -9,6 +9,8 @@ export const SET_TEMP = "SET_TEMP";
 export const SET_OFFSET = "SET_OFFSET";
 export const SET_STYPE = "SET_STYPE";
 
+export const CLEAR_RESPONSE = "CLEAR_RESPONSE";
+
 
 export function getSearch(q,token,os,type) {
     return dispatch => {
@@ -70,6 +72,15 @@ export function setSType(qq,token,os,type) {
         return dispatch({
             type: SET_STYPE,
             payload: type
+        });
+    }
+};
+
+export function clearResponse() {
+    return dispatch => {
+        return dispatch({
+            type: CLEAR_RESPONSE,
+            payload: {}
         });
     }
 };

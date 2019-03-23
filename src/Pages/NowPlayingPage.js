@@ -1,30 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Track from "../Components/Track";
 
-import Fab from '@material-ui/core/Fab';
-import PlayArrow from '@material-ui/icons/PlayArrow';
-import Pause from '@material-ui/icons/Pause';
-import SkipNext from '@material-ui/icons/SkipNext';
-import SkipPrevious from '@material-ui/icons/SkipPrevious';
-import Done from '@material-ui/icons/Done';
-import Add from '@material-ui/icons/Add';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
-
-import Tooltip from '@material-ui/core/Tooltip';
-
-import RemovedSnackBar,{openRemovedSnackbar} from "../Components/RemovedSnackBar";
-import {setToken} from "../Actions/auth-actions";
-
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-import {setLocalToken} from "../Services/authOperations";
-
-
+// Redux Actions
 import {getCurrentlyPlaying,
         pausePlayer,
         playPlayer,
@@ -34,12 +12,42 @@ import {getCurrentlyPlaying,
         saveTrackToLibrary,
         removeTrackFromLibrary,
         setSeek} from "../Actions/np-actions";
-import {Container, Grid} from "semantic-ui-react";
+import {setToken} from "../Actions/auth-actions";
+import {clearResponse} from "../Actions/np-actions";
+
+// Material UI Imports
+import Add from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Done from '@material-ui/icons/Done';
+import Fab from '@material-ui/core/Fab';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import Pause from '@material-ui/icons/Pause';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import SkipNext from '@material-ui/icons/SkipNext';
+import SkipPrevious from '@material-ui/icons/SkipPrevious';
+import Tooltip from '@material-ui/core/Tooltip';
+
+// Components
+import RemovedSnackBar,{openRemovedSnackbar} from "../Components/RemovedSnackBar";
+import Track from "../Components/Track";
 import SetSoundDialogWrapped from "../Components/SetSoundDialogWrapped";
 import ShareDialogWrapped from "../Components/ShareDialogWrapped";
-import getNewToken from "../Services/getNewToken";
-let removedTrackID="";
 
+// Semantic UI Imports
+import {Container, Grid} from "semantic-ui-react";
+
+// Services
+import getNewToken from "../Services/getNewToken";
+import {setLocalToken,
+        clearLocalRefreshToken,
+        clearLocalToken} from "../Services/authOperations";
+
+// Global Variables
+let removedTrackID="";
 const optionsMoore = [
     'Set Volume',
     'Share',
@@ -49,10 +57,26 @@ const optionsMoore = [
 ];
 
 
-
-
-
 class NowPlayingPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleProgressClick = this.handleProgressClick.bind(this);
+        this.togglePlayer = this.togglePlayer.bind(this);
+        this.Next = this.Next.bind(this);
+        this.Previous = this.Previous.bind(this);
+        this.toggleLibraryAdd = this.toggleLibraryAdd.bind(this);
+        this.handleUndo = this.handleUndo.bind(this);
+        this.handleClickMoore = this.handleClickMoore.bind(this);
+        this.handleCloseMoore = this.handleCloseMoore.bind(this);
+        this.handleMooreItemClick = this.handleMooreItemClick.bind(this);
+        this.handleOpenSetSoundDialog = this.handleOpenSetSoundDialog.bind(this);
+        this.handleCloseSetSoundDialog = this.handleCloseSetSoundDialog.bind(this);
+        this.handleOpenShareDialog = this.handleOpenShareDialog.bind(this);
+        this.handleCloseShareDialog = this.handleCloseShareDialog.bind(this);
+        this.openSpotify = this.openSpotify.bind(this);
+    };
+
 
     state={
         ProgressClass:"secondary",
@@ -62,13 +86,16 @@ class NowPlayingPage extends Component {
     };
 
     componentDidMount() {
-        this.timer = setInterval(()=>{
+        this.timer = setInterval(()=>{ // Check track status every second.
              this.props.onGetCurrentlyPlaying(this.props.auth.token);
         },1000);
 
     };
 
-    handleProgressClick = (e) =>{
+
+
+    handleProgressClick(e){
+        // Calculate clicked track position responsively.
         let width = window.innerWidth
             || document.documentElement.clientWidth
             || document.body.clientWidth;
@@ -82,14 +109,12 @@ class NowPlayingPage extends Component {
 
     };
 
-
-
-
     componentWillUnmount() {
         clearInterval(this.timer);
     };
 
     componentWillReceiveProps(nextProps, nextContext) {
+        // If current playing track changes, check TrackContainsInLibrary.
         if(nextProps.np.response.item!==undefined &&
             nextProps.np.response.item!==null){
         if (this.props.np.response.item !== nextProps.np.response.item)
@@ -97,22 +122,22 @@ class NowPlayingPage extends Component {
         }
     };
 
-    togglePlayer = () => {
+    togglePlayer(){
         if(this.props.np.response.is_playing)
             this.props.onPausePlayer(this.props.auth.token);
         else
             this.props.onPlayPlayer(this.props.auth.token);
     };
 
-    Next = () => {
+    Next(){
         this.props.onNextPlayer(this.props.auth.token);
     };
 
-    Previous = () => {
+    Previous(){
         this.props.onPreviousPlayer(this.props.auth.token);
     };
 
-    toggleLibraryAdd = () => {
+    toggleLibraryAdd(){
 
         if(this.props.np.tcl[0]){
             removedTrackID = this.props.np.response.item.id;
@@ -124,19 +149,19 @@ class NowPlayingPage extends Component {
             this.props.onSaveTrackToLibrary(this.props.auth.token,[this.props.np.response.item.id]);
     };
 
-    handleUndo = () => {
+    handleUndo(){
         this.props.onSaveTrackToLibrary(this.props.auth.token,[removedTrackID]);
     };
 
-    handleClickMoore = event => {
+    handleClickMoore(event){
         this.setState({ anchorEl: event.currentTarget });
     };
 
-    handleCloseMoore = () => {
+    handleCloseMoore(){
         this.setState({ anchorEl: null });
     };
 
-    handleMooreItemClick = (event, index) => {
+    handleMooreItemClick(event, index){
         this.setState({ anchorEl: null });
         switch (index) {
             case 0:{
@@ -166,62 +191,83 @@ class NowPlayingPage extends Component {
         }
     };
 
-    handleOpenSetSoundDialog=()=>{
+    handleOpenSetSoundDialog(){
         this.setState({openSetSoundDialog: true });
     };
 
-    handleCloseSetSoundDialog=()=>{
+    handleCloseSetSoundDialog(){
         this.setState({openSetSoundDialog: false });
     };
 
 
-    handleOpenShareDialog=()=>{
+    handleOpenShareDialog(){
         this.setState({openShareDialog: true });
     };
 
-    handleCloseShareDialog=()=>{
+    handleCloseShareDialog(){
         this.setState({openShareDialog: false });
+    };
+
+    openSpotify(){
+        window.location.replace("spotify:");
     };
 
 
 
 
     render() {
+            if (this.props.np.error.message) return (<Redirect to={`/login/${this.props.np.error.message.toString()}`}/>);
 
-        if (this.props.np.response.error){
-            // if token will expired try to fix with refresh token in future
+            // *** Auth and token operations ->
+        if (this.props.np.response.error && this.props.np.response.error.message.trim()!==""){
+            // If token will expired or broken, try to fix with refresh token.
 
-            if (this.props.np.response.error.message === "The access token expired")
+            if (this.props.np.response.error.message === "The access token expired" || this.props.np.response.error.message === "Invalid access token")
             {
-                let newToken = getNewToken();
+                let newToken = getNewToken(); // Fetching refresh token.
                 if (newToken) {
+                    this.props.clearResponse(); // Clear response for staying away from here after.
                     newToken.then((nt)=>{
-                        if(nt.access_token)
+                        if(nt.access_token) // Try to check if there is new refresh token in future.< >
                         {
                             // set our new token
-                            console.log(nt.access_token);
-                            this.props.setToken(nt.access_token);
-                            setLocalToken(nt.access_token);
-                            this.props.onGetCurrentlyPlaying(this.props.auth.token);
+                            this.props.setToken(nt.access_token); // Update our redux store.
+                            setLocalToken(nt.access_token); // Update local storage.
+                            return (<CircularProgress />);
 
-                        }else return (<Redirect to={`/login/${this.props.np.response.error.message.toString()}`}/>);
+                            // If there will be any error we should redirect to login page.
+                        }else {
+                            // If our refresh token is broken we should make our user unauthorized.
+                            this.props.setToken(null); // Update our redux store.
+                            clearLocalToken(); // Clear our local storage token.
+                            clearLocalRefreshToken(); // Clear our local storage refresh token.
+
+                            return (<Redirect to={`/login/${this.props.np.response.error.message.toString()}`}/>);
+                        }
                     })
+                }else {
+                    // If our refresh token is broken we should make our user unauthorized.
+                    this.props.setToken(null); // Update our redux store.
+                    clearLocalToken(); // Clear our local storage token.
+                    clearLocalRefreshToken(); // Clear our local storage refresh token.
+
+                    return (<Redirect to={`/login/${this.props.np.response.error.message.toString()}`}/>);
                 }
-
             }
-
-
+            else return (<Redirect to={`/login/${this.props.np.response.error.message.toString()}`}/>);
         };
+        // <- Auth and token operations ***
 
         const OpenSpotifyFirst = () =>{
-
+                // Open Spotify screen if there is none current playing track.
+            const styleGrid = { height: '90vh' };
             return(
-                <Grid textAlign='center' style={{ height: '90vh' }} verticalAlign='middle'>
+                <Grid textAlign='center' style={styleGrid} verticalAlign='middle'>
                 <Grid.Column>
                     <Button
                         variant="contained"
                         color="primary"
-                    onClick={()=>{window.location.replace("spotify:");}}>
+                        onClick={this.openSpotify}>
                         Open Spotify
                     </Button>
 
@@ -236,30 +282,35 @@ class NowPlayingPage extends Component {
 
 
         if (this.props.np.response.item===undefined) return <OpenSpotifyFirst/>;
+        const styleTrack = {marginTop:"10px",marginBottom:"25px"};
+        const styleFabR = {marginRight:"5px"};
+        const styleFabL = {marginLeft:"5px"};
+        const styleContainer = {paddingBottom:"7px"};
+        const styleLinearProgress = {marginTop:"20px"};
         return (
             <div className={"NowPlayingPage"}>
 
                 <Container textAlign='center' className={"TrackPage"}>
-                    <div style={{marginTop:"10px",marginBottom:"25px"}}>
+                    <div style={styleTrack}>
                         <Track data={this.props.np.response.item}/>
                     </div>
 
                 <Tooltip title={((this.props.np.tcl[0]))?"Remove from library":"Add to library"} placement={"bottom"}>
-                <Fab  aria-label="Edit" style={{marginRight:"5px"}} onClick={this.toggleLibraryAdd}>
+                <Fab  aria-label="Edit" style={styleFabR} onClick={this.toggleLibraryAdd}>
                     {(this.props.np.tcl[0])?<Done/>:<Add/>}
                 </Fab>
                 </Tooltip>
-                <Fab color="secondary" aria-label="Edit" style={{marginRight:"5px"}} onClick={this.Previous}>
+                <Fab color="secondary" aria-label="Edit" style={styleFabR} onClick={this.Previous}>
                     <SkipPrevious/>
                 </Fab>
                 <Fab color="primary" aria-label="Add" onClick={this.togglePlayer}>
                     {(this.props.np.response.is_playing)?<Pause />:<PlayArrow />}
                 </Fab>
-                <Fab color="secondary" aria-label="Edit"  style={{marginLeft:"5px"}} onClick={this.Next}>
+                <Fab color="secondary" aria-label="Edit"  style={styleFabL} onClick={this.Next}>
                     <SkipNext/>
                 </Fab>
-                <Fab  aria-label="Edit"
-                      style={{marginLeft:"5px"}}
+                <Fab aria-label="Edit"
+                      style={styleFabL}
                       aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
                       aria-haspopup="true"
                       onClick={this.handleClickMoore}>
@@ -291,15 +342,13 @@ class NowPlayingPage extends Component {
                     className={"TrackProgress"}
                     onClick={this.handleProgressClick}>
 
-                <Container style={{paddingBottom:"7px"}}>
+                <Container style={styleContainer}>
 
                     <LinearProgress
                         color={this.state.ProgressClass}
-                        style={{marginTop:"20px"}}
+                        style={styleLinearProgress}
                         variant="determinate"
                         value={this.props.np.response.progress_ms/this.props.np.response.item.duration_ms*100} />
-
-
                 </Container>
 
                 </div>
@@ -338,7 +387,8 @@ const mapDispatchToProps = {
     onSaveTrackToLibrary:saveTrackToLibrary,
     onRemoveTrackFromLibrary:removeTrackFromLibrary,
     setToken,
-    setSeek
+    setSeek,
+    clearResponse
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(NowPlayingPage);
