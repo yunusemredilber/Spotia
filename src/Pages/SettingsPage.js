@@ -101,8 +101,8 @@ class SettingsPage extends Component {
                 <Container textAlign='center'>
 
                     <Paper style={{marginTop:"10px"}}>
-                        <Typography variant="h4" gutterBottom>
-                        {"Settings"}
+                        <Typography variant="h4" gutterBottom style={{padding:"10px"}}>
+                            {"Settings"}
                         </Typography>
                     </Paper>
 
@@ -111,11 +111,13 @@ class SettingsPage extends Component {
                             {"Dark Mode"}
                         </Typography>
                         <Divider />
-                        <Switch
-                            checked={this.props.settings.palette.type==='dark'}
-                            onChange={this.handleDarkModeToggle}
-                            value="checkedA"
-                        />
+                        <div>
+                            <Switch
+                                checked={this.props.settings.palette.type==='dark'}
+                                onChange={this.handleDarkModeToggle}
+                                value="checkedA"
+                            />
+                        </div>
 
                     </Paper>
 

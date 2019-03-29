@@ -44,7 +44,7 @@ class ArtistPage extends Component {
         const { classes } = this.props;
         if (this.props.artist.artistObject===null || this.props.artist.artistObject===undefined || this.props.artist.fetchingArtistObject) return (<CircularProgress/>);
         return (
-            <div style={{padding:"10px"}}>
+            <div style={{padding:"10px"}} className={"Page"}>
                 <Container textAlign='center'>
                     <Paper>
                         <Typography variant="h5" gutterBottom>

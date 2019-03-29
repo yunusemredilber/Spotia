@@ -26,6 +26,11 @@ const styles = {
 };
 class Album extends Component {
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (this.props.data.id === nextProps.data.id) return false;
+        return true;
+    }
+
 
     render() {
 
@@ -34,7 +39,7 @@ class Album extends Component {
 
         return(
             <Card className={classes.card} style={{margin:"auto",display:"auto",marginLeft:"auto",marginRight:"auto"}}>
-                <Link to={`/album/${this.props.data.id}`}>
+                <Link to={`/album/${this.props.data.id}`} style={{color: "inherit"}}>
                     <CardActionArea>
                         <CardMedia
                             className={classes.media}

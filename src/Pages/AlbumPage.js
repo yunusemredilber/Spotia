@@ -57,7 +57,7 @@ class AlbumPage extends Component {
         const { classes } = this.props;
         if (this.props.album.albumObject===null || this.props.album.albumObject===undefined || this.props.album.fetchingAlbumObject) return (<div><CircularProgress/></div>);
         else return (
-            <div style={{padding:"10px"}}>
+            <div style={{padding:"10px"}} className={"Page"}>
                 <Container textAlign='center'>
 
                     <Paper >

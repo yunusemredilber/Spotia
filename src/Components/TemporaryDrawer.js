@@ -12,6 +12,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import PermIdentity  from '@material-ui/icons/PermIdentity';
 import Settings from '@material-ui/icons/Settings';
+import CloudIcon from '@material-ui/icons/Cloud';
 import {NavLink} from 'react-router-dom';
 
 
@@ -94,11 +95,10 @@ class TemporaryDrawer extends React.Component {
                     </NavLink>
 
 
-                        <ListItem button key={'d190324'}>
-
-                            <ListItemText primary={'Version'} secondary={"d190324"}/>
+                        <ListItem button key={'d190330'}>
+                            <ListItemIcon><CloudIcon /></ListItemIcon>
+                            <ListItemText primary={'Version'} secondary={"d190330"}/>
                         </ListItem>
-
 
                 </List>
             </div>

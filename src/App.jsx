@@ -19,10 +19,8 @@ import {getLocalToken,setLocalToken,setLocalRefreshToken} from "./Services/authO
 import {setToken} from "./Actions/auth-actions";
 
 import { connect } from 'react-redux';
-import {getTrackObject} from "./Actions/track-actions";
 import AlbumPage from "./Pages/AlbumPage";
 
-import {BACKEND_BASE} from "./confing/env";
 import Callback from "./Pages/Callback";
 import {CssBaseline} from "@material-ui/core";
 
@@ -32,34 +30,10 @@ import {setAdditionalSettings} from "./Actions/additionalSettings-actions";
 
 import {getLocalSettings,setLocalSettings,getAdditionalLocalSettings,setAdditionalLocalSettings} from "./Services/settingsOperations";
 
-
-
-
-
 class App extends Component {
   constructor(props){
-    super(props);/*
-        if (this.props.auth.token === null) 
-        {
-            if (getLocalToken()!==undefined)
-                this.props.onSetToken(getLocalToken());
-            else{
-                const params = this.getHashParams();
-                let token = params.access_token;
-                if (token!==undefined) {
-                    this.props.onSetToken(token);
-                    setLocalToken(token);
-                    console.log(getLocalToken());
-                }
+    super(props);
 
-                else
-                {
-                    this.props.onSetToken(null);
-                    window.location.replace("http://localhost:8888");
-                }
-
-            }
-        }*/
       // First look there is a new token came as parameter
       const params = this.getHashParams();
       let token = params.access_token;
@@ -79,7 +53,6 @@ class App extends Component {
       // Even there is no token then redirect to login page
       else {
           this.props.onSetToken(null);
-          window.location.replace(BACKEND_BASE);
       }
 
       // Settings init
@@ -101,7 +74,6 @@ class App extends Component {
       else {
           this.props.setAdditionalSettings(additionalSettings);
       }
-          
   }
 
     getHashParams() {
@@ -115,45 +87,26 @@ class App extends Component {
     }
     return hashParams;
   }
-/*
-  componentDidMount(){
-  let url = new URL('https://api.spotify.com/v1/search');
-  let params = {q:"y3d", type:"album,track,artist"}
-  url.search = new URLSearchParams(params);
-  fetch(url, {
-    method: "GET",
-    headers: {
-    Authorization: `Bearer ${this.state.token}`     
-  }
-  })
-  .then(response => response.json())
-  .then(r=>console.log(r))
-  }
-*/
 
     Logout = () => {
         this.props.onSetToken(null);
-        this.props.onSetToken(null);
+        setLocalToken(null);
+        setLocalRefreshToken(null);
         window.open("http://spotify.com/logout/", "_blank","width=400,height=600");
     };
 
-    hasScrollBar = () =>{
-        let hasScrollbar;
-
-        if (typeof window.innerWidth === 'number')
-            hasScrollbar = window.innerWidth > document.documentElement.clientWidth;
-
-         return  hasScrollbar ||
-            document.documentElement.scrollHeight > document.documentElement.clientHeight;
-    };
 
 
-
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (this.props.settings!==nextProps.settings) return true;
+        else if (this.props.additionalSettings !== nextProps.additionalSettings) return true;
+        else return false;
+    }
 
     render() {
 
-
       const theme = createMuiTheme(this.props.settings);
+
         return (
             <div >
                 <MuiThemeProvider theme={theme}>
@@ -161,9 +114,8 @@ class App extends Component {
                     <Router>
                         <div className={(this.props.additionalSettings.animatedGradientBackground)?"animatedGradientBackground":"App"}>
 
-
                             <AppBar logout={this.Logout} className={"AppBar"} token={this.props.auth.token} />
-                            <div className={"scroll"}>
+                            <div className={(this.props.additionalSettings.animatedGradientBackground)?"scroll":"noScroll"}>
                                 <Switch>
 
                                     <Route path={"/"} exact /*strict*/ component={HomePage}/>
@@ -194,12 +146,14 @@ class App extends Component {
 
 }
 const mapStateToProps = (state, props) => {
-    return {...state,...props};
+    return {
+        ...state,
+        ...props
+    };
 };
 
 const mapDispatchToProps = {
     onSetToken:setToken,
-    getTrackObject,
     setSettings,
     setAdditionalSettings
 };

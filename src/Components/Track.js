@@ -30,7 +30,10 @@ const styles = {
 class Track extends Component {
 
 
-
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (this.props.data.id === nextProps.data.id) return false;
+        return true;
+    }
 
     render(){
 
@@ -77,4 +80,4 @@ class Track extends Component {
         };
 }
 
-export default withStyles(styles, { withTheme: true })(Track);
+export default withStyles(styles)(Track);

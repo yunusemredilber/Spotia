@@ -45,6 +45,7 @@ import getNewToken from "../Services/getNewToken";
 import {setLocalToken,
         clearLocalRefreshToken,
         clearLocalToken} from "../Services/authOperations";
+import Palette from "react-palette";
 
 // Global Variables
 let removedTrackID="";
@@ -55,7 +56,7 @@ const optionsMoore = [
     'Go to album',
     'More Tracks Like that',
 ];
-
+let root = document.documentElement;
 
 class NowPlayingPage extends Component {
 
@@ -92,7 +93,15 @@ class NowPlayingPage extends Component {
 
     };
 
-
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (this.state!==nextState) return true;
+        if (this.props.np.response.item){
+            if (this.props.np.response.item !== nextProps.np.response.item) return true;
+            else if (this.props.np.tcl[0]!==nextProps.np.tcl[0]) return true;
+            else return false;
+        }
+        else return true;
+    }
 
     handleProgressClick(e){
         // Calculate clicked track position responsively.
@@ -293,6 +302,18 @@ class NowPlayingPage extends Component {
                 <Container textAlign='center' className={"TrackPage"}>
                     <div style={styleTrack}>
                         <Track data={this.props.np.response.item}/>
+                        <Palette image={this.props.np.response.item.album.images[0].url}>
+                            {palette=>{
+                                root.style.setProperty('--color-1', palette.vibrant);
+                                root.style.setProperty('--color-2', palette.muted);
+                                root.style.setProperty('--color-3', palette.lightVibrant);
+                                root.style.setProperty('--color-4', palette.lightMuted);
+                                root.style.setProperty('--color-5', palette.darkVibrant);
+                                root.style.setProperty('--color-6', palette.darkMuted);
+
+                                return (<div></div>)
+                            }}
+                        </Palette>
                     </div>
 
                 <Tooltip title={((this.props.np.tcl[0]))?"Remove from library":"Add to library"} placement={"bottom"}>
@@ -374,7 +395,10 @@ class NowPlayingPage extends Component {
 
 
 const mapStateToProps = (state, props) => {
-    return {...state,...props};
+    return {
+        ...state,
+        ...props
+    };
 };
 
 const mapDispatchToProps = {

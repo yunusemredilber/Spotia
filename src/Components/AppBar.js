@@ -54,7 +54,6 @@ class SearchAppBar extends Component{
 
 
 
-
     handleChange = event => {
         this.setState({ auth: event.target.checked });
     };

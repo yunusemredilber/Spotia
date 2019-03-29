@@ -41,41 +41,35 @@ const styles = theme => ({
         color: theme.palette.text.secondary,
     },
     paper: {
-        backgroundColor: "transparent",
+        /*backgroundColor: "transparent",*/
 
     },
 });
 
 class TrackPage extends Component {
 
-    state = { palette: {} };
-
-
-
-
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        if (this.state.palette.vibrant )
-        {   console.log("yo");
-            let vibr = window.getComputedStyle(document.documentElement).getPropertyValue('--color-1');
-            if (vibr !== this.state.palette.vibrant){
-                root.style.setProperty('--color-1', this.state.palette.vibrant);
-                root.style.setProperty('--color-2', this.state.palette.muted);
-                root.style.setProperty('--color-3', this.state.palette.lightVibrant);
-                root.style.setProperty('--color-4', this.state.palette.lightMuted);
-                root.style.setProperty('--color-5', this.state.palette.darkVibrant);
-                root.style.setProperty('--color-6', this.state.palette.darkMuted);
-            }
-
-        }
-    }
+    state={
+      imageWH:250
+    };
 
 
     componentDidMount() {
         if (this.props.match)
             this.props.getTrackObject(this.props.match.params.id,this.props.auth.token);
-            
 
     }
+
+    toggleImage = () =>{
+        let width = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+        let r = (this.state.imageWH===width/2)?250:width/2;
+        if (width/2<250){
+            if (this.state.imageWH===300) r = 250; else r = 300;
+            this.setState({imageWH:r});
+        }
+        this.setState({imageWH:r});
+    };
 
     render() {
 
@@ -86,10 +80,10 @@ class TrackPage extends Component {
         const imageUrl = this.props.track.trackObject.album.images[0].url;
         return (
             <div
-                className={["TrackPage"]} style={{padding:"10px",}}
+                className={"Page"}
+                 style={{padding:"10px",}}
             >
-                <Container textAlign='center' className={"TrackPage"} >
-
+                <Container textAlign='center'>
                     <Paper className={classes.paper}>
                         <Typography variant="h5" gutterBottom>
                             {this.props.track.trackObject.name} -
@@ -121,9 +115,10 @@ class TrackPage extends Component {
                      <img
                          src={imageUrl}
                          alt={this.props.track.trackObject.name}
-                         width={"250"}
-                         height={"250"}
+                         width={this.state.imageWH}
+                         height={this.state.imageWH}
                          style={{margin:"5px"}}
+                         onClick={this.toggleImage}
                           />
 
                     </Paper>
@@ -176,10 +171,7 @@ class TrackPage extends Component {
                                 </ExpansionPanelDetails>
                             </ExpansionPanel>
                     </Paper>
-
-
                 </Container >
-
             </div>
         );
     }

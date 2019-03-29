@@ -125,7 +125,7 @@ class SearchPage extends Component {
                 </Grid>
                 <br/>
                 {(isResponseExist)?
-                    <Button variant="outlined" onClick={this.getMore}>
+                    <Button variant="outlined" onClick={this.getMore} style={{marginBottom:"5px"}}>
                         More
                     </Button>:<br/>}
 
@@ -150,7 +150,7 @@ class SearchPage extends Component {
                 </Grid>
                 <br/>
                 {(isResponseExist)?
-                    <Button variant="outlined" onClick={this.getMore}>
+                    <Button variant="outlined" onClick={this.getMore} style={{marginBottom:"5px"}}>
                         More
                     </Button>:<br/>}
 
@@ -175,7 +175,7 @@ class SearchPage extends Component {
                 </Grid>
                 <br/>
                 {(isResponseExist)?
-                    <Button variant="outlined" onClick={this.getMore}>
+                    <Button variant="outlined" onClick={this.getMore} style={{marginBottom:"5px"}}>
                         More
                     </Button>:<br/>}
 

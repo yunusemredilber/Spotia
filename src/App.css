@@ -143,6 +143,11 @@ button {
 
 }
 
+.Page{
+  height: 90vh;
+  width:  100vw;
+}
+
 .AppBar{
 
 }
@@ -157,10 +162,7 @@ button {
   margin: 1em auto !important; /*Fix the grid centering problem*/
 }
 
-.TrackPage{
-  vertical-align: center;
-  text-align: center;
-}
+
 /*  WARNINGGGG
 *   This code is making searchpage results smaller!!!!
 */
@@ -259,4 +261,13 @@ body{
 .scroll{
   overflow-y:scroll;
   overflow-x:hidden;
+}
+
+.noScroll{
+
+}
+
+.NowPlayingPage{
+  height: 90vh;
+  width:  100vw;
 }
