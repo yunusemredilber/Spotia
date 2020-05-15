@@ -1,4 +1,8 @@
-This site live on [spotia.space](https://spotia.space). While this project is still in development progress, backend could make you wait around 10 seconds.
+# Spotia
+
+**This is the repo where I learned React by doing try and fail. It contains a lot of antipatterns and bad code. I'm planning to update it with hooks in the near feature.**
+
+This site lives in [spotia.netlify.com](https://spotia.netlify.com/). While this project is still in development progress, backend could make you wait around 10 seconds.
 
 For backend [web-api-auth-examples](https://github.com/spotify/web-api-auth-examples) used. Also you might want to check [ Spotify's Authorization Scopes](https://developer.spotify.com/documentation/general/guides/scopes/).
 
